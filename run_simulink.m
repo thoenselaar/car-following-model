@@ -9,7 +9,17 @@ S_THRESHOLD = 0.5; % speed threshold
 
 N = 1000; % moving average parameter
 
+%% car parameters
+v_0 = 120;
+T = 1.5;
+s_0 = 2.0;
+a = 1.0; 
+b = 2.0;
+delta = 4;
+l_avg = 4.8;
+
 sim('car_following_model')
+disp('Simulation done')
 
 %%
 figure(1)
@@ -17,19 +27,22 @@ subplot(3,1,1)
 hold on
 plot(x_ddot_leader.Time,x_ddot_leader.Data)
 plot(x_ddot_follower.Time,x_ddot_follower.Data)
-legend('Leader','Follower')
+plot(x_ddot_follower_model.Time,x_ddot_follower_model.Data)
+legend('Leader','Follower (implementation)','Follower (model)')
 
 subplot(3,1,2)
 hold on
 plot(x_dot_leader.Time,x_dot_leader.Data)
 plot(x_dot_follower.Time,x_dot_follower.Data)
-legend('Leader','Follower')
+plot(x_dot_follower_model.Time,x_dot_follower_model.Data)
+legend('Leader','Follower (implementation)','Follower (model)')
 
 subplot(3,1,3)
 hold on
 plot(x_leader.Time,x_leader.Data)
 plot(x_follower.Time,x_follower.Data)
-legend('Leader','Follower')
+plot(x_follower_model.Time,x_follower_model.Data)
+legend('Leader','Follower (implementation)','Follower (model)')
 
 
 %%
